@@ -4,7 +4,7 @@ function FetchVideos() {
   const [videos, getVideos] = useState()
 
   const fetchMyAPI = useCallback(async () => {
-    let response = await fetch('http://localhost:3001/videos')
+    let response = await fetch('https://patrick-main-portfolio.herokuapp.com/videos')
     response = await response.json()
     getVideos(response)
   }, [])

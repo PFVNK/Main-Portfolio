@@ -19,10 +19,6 @@ app.get('/videos', (req, res) => {
     })
 })
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
-});
-
 function notFound(req, res, next) {
   res.status(404)
   const error = new Error('Not found')

@@ -10,12 +10,6 @@ const app = express()
 app.use(morgan('tiny'))
 app.use(cors())
 
-app.use(express.static(path.join(__dirname, 'client/build')))
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'))
-})
-
 app.get('/videos', (req, res) => {
   const url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLDU0zxRNUv8lKih2evaNl9V5wDkP7N4Ul'
   fetch(`${url}&key=${process.env.GOOGLE_API_KEY}`)
@@ -24,6 +18,10 @@ app.get('/videos', (req, res) => {
       res.json(json.items)
     })
 })
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 function notFound(req, res, next) {
   res.status(404)
